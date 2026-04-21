@@ -27,17 +27,19 @@ jobs:
     
     - name: Validate Prometheus configuration
       run: |
-          docker run --rm \
+        docker run --rm \
+            --entrypoint promtool \
             -v ${{ github.workspace }}/prometheus:/etc/prometheus \
             prom/prometheus:latest \
-            promtool check config /etc/prometheus/prometheus.yml
+            check config /etc/prometheus/prometheus.yml
     
     - name: Validate Alert Rules
       run: |
-          docker run --rm \
+        docker run --rm \
+            --entrypoint promtool \
             -v ${{ github.workspace }}/prometheus:/etc/prometheus \
             prom/prometheus:latest \
-            promtool check rules /etc/prometheus/alerts.yml
+            check rules /etc/prometheus/alerts.yml
 
     - name: Build Docker image
       run: |
