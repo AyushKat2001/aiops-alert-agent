@@ -52,5 +52,10 @@ jobs:
             -e SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }} \
             --name test-agent aiops-agent
           sleep 5
-          curl -f http://localhost:5001/health
+          echo "===== CONTAINER LOGS ====="
+          docker logs test-agent
+
+          echo "===== CURL TEST ====="
+          curl -v http://localhost:5001/health
+
           docker stop test-agent
