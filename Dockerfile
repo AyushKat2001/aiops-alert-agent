@@ -10,4 +10,4 @@ COPY app/ ./app/
 
 EXPOSE 5001
 
-CMD [ "python", "agent/train_agent.py" ]
+CMD [ "python", "agent/triage_agent.py" ]
