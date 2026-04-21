@@ -1,0 +1,38 @@
+groups:
+- name: app-alerts
+  rules:
+  - alert: HighErrorRate
+    expr: app_error_rate > 10
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High error rate detected"
+      description: "App error rate is {{ $value }}% which is above the 10% threshold."
+  
+  - alert: HighCPUUsage
+    expr: app_cpu_usage_percent > 80
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage detected"
+      description: "App CPU usage is {{ $value }}% which is above the 80% threshold."
+  
+  - alert: HighMemoryUsage  
+    expr: app_memory_usage_bytes > 800000000
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High memory usage detected"
+      description: "Memory usage is {{ $value }} bytes which is above 800MB threshold."
+    
+  - alert: AppDown
+    expr: up{job="app"} == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:  
+      summary: "App is down"
+      description: "The app is not responding for more than 30 seconds."

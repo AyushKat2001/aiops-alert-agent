@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python app/main.py
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+  
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python agent/triage_agent.py
+    ports:
+      - "5001:5001"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    restart: unless-stopped
+    depends_on:
+      - app
+  
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=7d'
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    depends_on:
+      - app
+  
+  alertmanager:
+    image: prom/alertmanager:latest
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+    ports:
+      - "9093:9093"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=devops111
+    restart: unless-stopped
+    depends_on:
+      - prometheus
