@@ -179,7 +179,8 @@ docker-compose up --build
 | Grafana | http://localhost:3000 |
 
 ---
-
+### Docker Containers Up and Running
+---
 ![Docker](screenshots/docker.png)
 
 ---
