@@ -40,31 +40,9 @@ Triage report posted to Slack
 ## The Slack report looks like this
 
 ```
-Alert Triage Report
+![Slack](screenshots/slack-higherror.png)
 
-Alert:    HighErrorRate
-Severity: CRITICAL
-Summary:  App error rate has exceeded the 10% threshold.
-
-Probable Cause:
-A recent deployment may have introduced a regression in the error
-handling logic. Database connection timeouts are another likely
-cause given the sustained nature of the spike.
-
-Immediate Actions:
-1. Check recent deployments in the last 2 hours
-2. Review application logs for stack traces
-3. Check database connection pool metrics
-
-Suggested Fix:
-Roll back the most recent deployment if it correlates with the
-spike onset. If DB-related, increase connection pool size and
-add retry logic.
-
-Verdict: CRITICAL - PAGE ON-CALL
 ```
-
----
 
 ## Stack
 
@@ -243,9 +221,6 @@ curl -X POST http://localhost:5001/webhook \
 Check your Slack channel within 10 seconds — the triage report will appear automatically.
 
 ![Slack](screenshots/slack-appdown.png)
-
----
-![Slack](screenshots/slack-higherror.png)
 
 ---
 
