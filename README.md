@@ -38,11 +38,11 @@ Triage report posted to Slack
 ---
 
 ## The Slack report looks like this
+---
 
-```
 ![Slack](screenshots/slack-higherror.png)
 
-```
+---
 
 ## Stack
 
