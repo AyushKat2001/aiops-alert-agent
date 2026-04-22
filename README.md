@@ -5,13 +5,6 @@
 **An AI-powered alert triage system that automatically diagnoses Prometheus alerts and posts structured reports to Slack.**
 No more waking up the on-call engineer for an alert that has an obvious fix. The AI reads it first.
 
-![CI](https://github.com/ayush272001/aiops-alert-agent/actions/workflows/ci.yml/badge.svg)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat&logo=grafana&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=slack&logoColor=white)
-
 </div>
 
 ---
@@ -207,6 +200,20 @@ docker-compose up --build
 
 ---
 
+![Docker](screenshots/docker.png)
+
+---
+### Prometheus Alerts
+---
+![prom](screenshots/prom.png)
+
+---
+### AlertManager
+---
+![Docker](screenshots/alerts.png)
+
+---
+
 ## Trigger a Test Alert
 
 Fire a manual alert to test the full flow end to end:
@@ -233,16 +240,12 @@ curl -X POST http://localhost:5001/webhook \
   }'
 ```
 
-**On Windows (PowerShell):**
-
-```powershell
-Invoke-WebRequest -Uri "http://localhost:5001/webhook" `
-  -Method POST `
-  -ContentType "application/json" `
-  -Body '{"alerts":[{"status":"firing","labels":{"alertname":"HighErrorRate","severity":"critical","instance":"app:8000"},"annotations":{"summary":"High error rate detected","description":"App error rate is 14.5% above threshold."},"startsAt":"2024-01-15T10:30:00Z"}]}'
-```
-
 Check your Slack channel within 10 seconds — the triage report will appear automatically.
+
+![Slack](screenshots/slack-appdown.png)
+
+---
+![Slack](screenshots/slack-higherror.png)
 
 ---
 
@@ -274,6 +277,7 @@ GitHub Actions runs on every push and PR. It validates your infrastructure confi
 </table>
 
 ---
+![ci](screenshots/pipeline.png)
 
 ## Security
 
