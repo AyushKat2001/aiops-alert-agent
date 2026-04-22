@@ -5,6 +5,8 @@
 **An AI-powered alert triage system that automatically diagnoses Prometheus alerts and posts structured reports to Slack.**
 No more waking up the on-call engineer for an alert that has an obvious fix. The AI reads it first.
 
+![bot](screenshots/diagram.png)
+
 </div>
 
 ---
@@ -40,7 +42,7 @@ Triage report posted to Slack
 ## The Slack report looks like this
 ---
 
-![Slack](screenshots/slack-higherror.png)
+![slack](screenshots/slack-higherror.png)
 
 ---
 
